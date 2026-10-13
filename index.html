@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PEDAGOS — Laboratorul numerelor mari</title>
+<style>
+:root{--indigo:#3546a8;--violet:#7655c8;--mint:#c9f7e7;--green:#087f5b;--ink:#202647;--muted:#626b83;--paper:#f6f8ff;--line:#dfe4f3;--red:#b42336;--amber:#fff2cc}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(135deg,#f5f7ff,#f3fbf8);font-family:Arial,Helvetica,sans-serif;color:var(--ink);line-height:1.5}.wrap{max-width:1120px;margin:auto;padding:22px}.hero{background:linear-gradient(120deg,var(--indigo),var(--violet));color:white;border-radius:24px;padding:28px;box-shadow:0 12px 30px #28378020}.brand{font-weight:900;letter-spacing:.14em;font-size:1.05rem}.hero h1{margin:8px 0;font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.15}.hero p{margin:8px 0 0;color:#f0efff}.meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:18px}.pill{border:1px solid #ffffff55;background:#ffffff17;border-radius:999px;padding:6px 12px;font-size:.9rem}.panel{margin:18px 0;background:white;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:0 5px 18px #26346d0b}.controls{display:flex;align-items:center;flex-wrap:wrap;gap:12px}.controls label{font-weight:700}.controls select{font:inherit;padding:10px 12px;border:1px solid #c9cfe4;border-radius:10px;background:white;color:var(--ink)}.note{color:var(--muted);font-size:.94rem;margin:12px 0 0}.objectives{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}.objective{background:#f7f8ff;border-radius:12px;padding:12px;font-size:.92rem}.section-title{display:flex;align-items:center;gap:10px;margin:25px 0 12px;font-size:1.2rem}.section-title span{display:inline-grid;place-items:center;background:var(--mint);width:34px;height:34px;border-radius:10px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{background:white;border:1px solid var(--line);border-radius:17px;padding:17px;box-shadow:0 4px 15px #2837800b;break-inside:avoid;transition:border-color .15s,transform .15s}.card:focus-within{border-color:#7d8be3}.card h3{margin:0 0 9px;font-size:1rem;display:flex;justify-content:space-between;gap:8px}.tag{font-size:.76rem;color:#4c438f;background:#f0edff;padding:3px 8px;border-radius:999px;white-space:nowrap}.problem{font-size:1.25rem;font-weight:800;letter-spacing:.01em;margin:10px 0 14px;overflow-wrap:anywhere}.answer-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.answer-row label{font-size:.9rem;font-weight:700}.answer{width:min(100%,245px);font:inherit;font-size:1.05rem;padding:10px 12px;border:2px solid #d8ddef;border-radius:10px;outline-offset:2px}.answer:focus{border-color:var(--indigo)}.answer:disabled{background:#f1f3f8;color:#555}.status{margin:10px 0 0;font-size:.92rem}.status:empty{display:none}.card.correct{border:2px solid #19966c;background:#f4fff9}.card.incorrect{border:2px solid #d44857;background:#fff8f8}.card.unanswered{border:2px solid #d99c24;background:#fffdf6}.feedback{background:#f1f5ff;border-radius:10px;padding:10px;margin-top:10px;font-size:.92rem}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}.btn{border:0;border-radius:12px;padding:13px 18px;font:inherit;font-weight:800;cursor:pointer;transition:transform .12s,filter .12s}.btn:hover{filter:brightness(.97);transform:translateY(-1px)}.btn:focus-visible{outline:3px solid #f0b429;outline-offset:3px}.primary{background:var(--indigo);color:white}.secondary{background:var(--mint);color:#064e3b}.tertiary{background:#eee9ff;color:#48328d}.result{display:none;border:2px solid #d8dff5;background:white;border-radius:18px;padding:20px;margin:18px 0}.result.show{display:block}.score{font-size:2rem;font-weight:900;color:var(--indigo)}.progress{height:12px;border-radius:99px;background:#e7eaf5;overflow:hidden;margin:12px 0}.progress div{height:100%;width:0;background:linear-gradient(90deg,#4c63d2,#4ec9a0);transition:width .3s}.result h2{margin:0 0 8px}.footer{text-align:center;color:var(--muted);font-size:.85rem;padding:10px 0 30px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:720px){.wrap{padding:12px}.hero{padding:22px}.grid{grid-template-columns:1fr}.panel{padding:14px}.problem{font-size:1.15rem}.answer{width:100%}.btn{width:100%}}
+@media print{@page{size:A4;margin:14mm}body{background:white;color:#111;font-size:11pt}.wrap{max-width:none;padding:0}.hero{background:white;color:#111;box-shadow:none;border:0;border-bottom:2px solid #222;border-radius:0;padding:0 0 10px}.hero p{color:#111}.brand{letter-spacing:.1em}.hero h1{font-size:21pt}.meta,.panel,.actions,.result,.footer,.tag,.note{display:none!important}.print-info{display:block!important;margin:12px 0 18px}.section-title{margin:16px 0 8px;font-size:13pt}.grid{grid-template-columns:1fr 1fr;gap:10px}.card{box-shadow:none;border:1px solid #aaa;border-radius:4px;padding:10px;min-height:118px}.card h3{font-size:10pt}.problem{font-size:13pt;margin:8px 0}.answer-row,.status,.feedback{display:none!important}.work-lines{display:block!important;margin-top:8px;height:38px;border-bottom:1px solid #bbb}.work-lines:after{content:"";display:block;height:18px;border-bottom:1px dotted #ddd}.card{break-inside:avoid}.section-title span{background:white;border:1px solid #888;border-radius:4px;width:25px;height:25px}}
+.print-info{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="hero">
+  <div class="brand">PEDAGOS</div>
+  <h1>Laboratorul numerelor mari</h1>
+  <p>Calculează, verifică, învață și încearcă din nou!</p>
+  <div class="meta"><span class="pill">Matematică · clasa a IV-a</span><span class="pill">Numere naturale: 100–1 000 000</span><span class="pill" id="variant">Varianta 1</span></div>
+</header>
+<section class="panel">
+ <div class="controls">
+  <label for="level">Alege nivelul:</label>
+  <select id="level"><option value="1">Nivel 1 — consolidare</option><option value="2" selected>Nivel 2 — standard</option><option value="3">Nivel 3 — provocare</option></select>
+  <span id="levelDescription" class="note">Numere de ordin mai mare, calcule echilibrate și termeni necunoscuți.</span>
+ </div>
+ <p class="note">Instrucțiuni: rezolvă toate cele 12 exerciții. Scrie numai numărul sau, la provocările de gândire, răspunsul cerut. Fiecare exercițiu valorează 1 punct. Folosește estimarea și operația inversă pentru a-ți verifica rezultatele.</p>
+</section>
+<section class="panel">
+ <h2 style="margin-top:0">Ce vei exersa?</h2>
+ <div class="objectives">
+  <div class="objective">✓ Efectuarea adunărilor și scăderilor, cu și fără trecere peste ordin.</div>
+  <div class="objective">✓ Determinarea termenului necunoscut folosind operația inversă.</div>
+  <div class="objective">✓ Verificarea plauzibilității rezultatelor și a calculelor.</div>
+  <div class="objective">✓ Identificarea unei erori și justificarea verificării.</div>
+ </div>
+ <p class="note">Obiective măsurabile: vei rezolva 8 calcule, vei determina 2 termeni necunoscuți și vei răspunde la 2 provocări; vei obține câte 1 punct pentru fiecare răspuns exact.</p>
+</section>
+<div class="print-info">
+ <p><strong>Numele și prenumele:</strong> ______________________________________ &nbsp; <strong>Clasa:</strong> _______</p>
+ <p><strong>Data:</strong> __________________ &nbsp; <strong>Nivel:</strong> <span id="printLevel">Standard</span></p>
+ <p><strong>Instrucțiuni:</strong> Rezolvă exercițiile și verifică rezultatele. Arată calculele în spațiul disponibil.</p>
+</div>
+<main id="exerciseArea" aria-label="Evaluare matematică"></main>
+<section id="result" class="result" aria-live="polite" aria-atomic="true">
+ <h2>Rezultatul tău</h2><div class="score" id="score">0 / 12 puncte</div><div id="percent">0% răspunsuri corecte</div><div class="progress" role="progressbar" aria-label="Procent de răspunsuri corecte" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="progressFill"></div></div><p id="summary"></p><p class="note">Punctaj = numărul răspunsurilor corecte. Procent = punctaj ÷ 12 × 100, rotunjit la cel mai apropiat număr întreg.</p>
+</section>
+<div class="actions">
+ <button type="button" class="btn primary" id="checkBtn">VERIFICĂ RĂSPUNSURILE</button>
+ <button type="button" class="btn secondary" id="newBtn">GENEREAZĂ O NOUĂ EVALUARE</button>
+ <button type="button" class="btn tertiary" id="printBtn">LISTEAZĂ EVALUAREA</button>
+</div>
+<div class="footer">PEDAGOS · Înveți prin calcul, verificare și reflecție.</div>
+</div>
+<script>
+'use strict';
+const MAX = 1000000;
+const area = document.getElementById('exerciseArea');
+const levelSelect = document.getElementById('level');
+const resultBox = document.getElementById('result');
+const checkBtn = document.getElementById('checkBtn');
+let exercises = [];
+let variantNo = 0;
+let checked = false;
+let lastSignature = '';
+const levelNames = {'1':'Consolidare','2':'Standard','3':'Provocare'};
+const levelDescriptions = {
+ '1':'Numere mai accesibile, cu dificultate progresivă și calcule clare.',
+ '2':'Numere de ordin mai mare, calcule echilibrate și termeni necunoscuți.',
+ '3':'Numere apropiate de limita concentrului și verificări care cer raționament.'
+};
+function randInt(min,max){return Math.floor(Math.random()*(max-min+1))+min}
+function fmt(n){return n.toLocaleString('ro-RO').replace(/\u00a0/g,' ')}
+function digits(n){return String(n).split('').map(Number).reverse()}
+function hasCarry(a,b){
+ let x=digits(a),y=digits(b),carry=0;
+ for(let i=0;i<Math.max(x.length,y.length);i++){let s=(x[i]||0)+(y[i]||0)+carry;if(s>=10)return true;carry=s>=10?1:0}
+ return false
+}
+function hasBorrow(a,b){
+ let x=digits(a),y=digits(b),borrow=0;
+ for(let i=0;i<x.length;i++){let d=x[i]-borrow;if(d<(y[i]||0))return true;borrow=d<(y[i]||0)?1:0}
+ return false
+}
+function ranges(){
+ if(levelSelect.value==='1')return {min:100,max:99999,smallMax:9999};
+ if(levelSelect.value==='3')return {min:10000,max:MAX,smallMax:999999};
+ return {min:1000,max:999999,smallMax:99999}
+}
+function pick(predicate,make,used){
+ for(let tries=0;tries<5000;tries++){
+  const e=make();
+  if(!predicate(e)||e.answer<0||e.answer>MAX||!Number.isSafeInteger(e.answer))continue;
+  const sig=e.type+'|'+e.prompt;
+  if(used.has(sig))continue;
+  used.add(sig);return e;
+ }
+ throw new Error('Nu s-a putut genera un exercițiu valid. Încearcă alt nivel.');
+}
+function addition(carryRequired,used,kind,differentOrder=false){
+ const r=ranges();
+ return pick(e=>e.answer>=100&&e.answer<=MAX&&hasCarry(e.a,e.b)===carryRequired&&(!differentOrder||String(e.a).length!==String(e.b).length),
+ ()=>{let a=randInt(r.min,Math.min(r.max,MAX-100)),b=randInt(100,Math.min(r.max,MAX-a));return {type:'add',category:kind,prompt:`${fmt(a)} + ${fmt(b)} =`,a,b,answer:a+b,explanation:`Verificare prin scădere: ${fmt(a+b)} − ${fmt(b)} = ${fmt(a)}.`}},used)
+}
+function subtraction(borrowRequired,used,kind){
+ const r=ranges();
+ return pick(e=>e.answer>=100&&e.answer<=MAX&&hasBorrow(e.a,e.b)===borrowRequired,
+ ()=>{let a=randInt(Math.max(200,r.min),r.max),b=randInt(100,Math.min(a-100,r.max));return {type:'sub',category:kind,prompt:`${fmt(a)} − ${fmt(b)} =`,a,b,answer:a-b,explanation:`Verificare prin adunare: ${fmt(a-b)} + ${fmt(b)} = ${fmt(a)}.`}},used)
+}
+function unknown(used,index){
+ const r=ranges();
+ return pick(e=>e.answer>=0&&e.answer<=MAX&&Number.isSafeInteger(e.answer),
+ ()=> {
+  let a=randInt(100,Math.max(101,Math.min(r.max,levelSelect.value==='1'?9999:levelSelect.value==='2'?99999:500000)));
+  let x=randInt(100,Math.max(101,Math.min(r.max,levelSelect.value==='1'?9999:levelSelect.value==='2'?99999:500000)));
+  const form=index===0?randInt(0,1):randInt(2,3);
+  let prompt,answer,formula;
+  if(form===0){let b=a+x;if(b>MAX)return {type:'unknown',prompt:'',answer:MAX+1};prompt=`${fmt(a)} + x = ${fmt(b)}. x =`;answer=x;formula=`x = ${fmt(b)} − ${fmt(a)} = ${fmt(x)}.`}
+  if(form===1){let b=a+x;if(b>MAX)return {type:'unknown',prompt:'',answer:MAX+1};prompt=`x + ${fmt(a)} = ${fmt(b)}. x =`;answer=x;formula=`x = ${fmt(b)} − ${fmt(a)} = ${fmt(x)}.`}
+  if(form===2){let b=a+x;if(b>MAX)return {type:'unknown',prompt:'',answer:MAX+1};prompt=`${fmt(b)} − x = ${fmt(a)}. x =`;answer=x;formula=`x = ${fmt(b)} − ${fmt(a)} = ${fmt(x)}.`}
+  if(form===3){let b=a+x;if(b>MAX)return {type:'unknown',prompt:'',answer:MAX+1};prompt=`x − ${fmt(a)} = ${fmt(x)}. x =`;answer=b;prompt=`x − ${fmt(a)} = ${fmt(b)}. x =`;formula=`x = ${fmt(b)} + ${fmt(a)} = ${fmt(x)}.`}
+  return {type:'unknown',category:'Termen necunoscut',prompt,answer,explanation:formula}
+ },used)
+}
+function errorChallenge(used){
+ const r=ranges();
+ return pick(e=>e.answer>=100&&e.answer<=MAX&&e.claim!==e.answer,
+ ()=>{let a=randInt(r.min,Math.min(r.max,MAX-100)),b=randInt(100,Math.min(r.max,MAX-a));let actual=a+b;let claim=actual+randInt(1,9);if(claim>MAX)claim=actual-randInt(1,Math.min(9,actual-100));return {type:'error',category:'Detectiv de erori',prompt:`Un elev a scris: ${fmt(a)} + ${fmt(b)} = ${fmt(claim)}. Ce rezultat este corect?`,a,b,claim,answer:actual,explanation:`Calculul corect este ${fmt(a)} + ${fmt(b)} = ${fmt(actual)}. Rezultatul propus (${fmt(claim)}) diferă de suma exactă.`}},used)
+}
+function inverseChallenge(used){
+ const r=ranges();
+ return pick(e=>e.answer>=100&&e.answer<=MAX,
+ ()=>{let a=randInt(Math.max(200,r.min),r.max),b=randInt(100,Math.min(a-100,r.max)),d=a-b;return {type:'inverse',category:'Operația inversă',prompt:`Verifică: ${fmt(a)} − ${fmt(b)} = ${fmt(d)}. Ce rezultat obții calculând ${fmt(d)} + ${fmt(b)}?`,a,b,claim:d,answer:d+b,explanation:`Adunarea verifică scăderea: ${fmt(d)} + ${fmt(b)} = ${fmt(a)}. Dacă obții descăzutul, scăderea este verificată.`}},used)
+}
+function buildEvaluation(){
+ const used=new Set(),out=[];
+ out.push(addition(false,used,'Adunare fără trecere peste ordin',true));
+ out.push(addition(false,used,'Adunare fără trecere peste ordin',true));
+ out.push(addition(true,used,'Adunare cu trecere peste ordin'));
+ out.push(addition(true,used,'Adunare cu trecere peste ordin'));
+ out.push(subtraction(false,used,'Scădere fără trecere peste ordin'));
+ out.push(subtraction(false,used,'Scădere fără trecere peste ordin'));
+ out.push(subtraction(true,used,'Scădere cu trecere peste ordin'));
+ out.push(subtraction(true,used,'Scădere cu trecere peste ordin'));
+ out.push(unknown(used,0),unknown(used,1));
+ out.push(errorChallenge(used),inverseChallenge(used));
+ return out;
+}
+function sectionTitle(title,icon){const h=document.createElement('h2');h.className='section-title';const s=document.createElement('span');s.textContent=icon;const t=document.createElement('span');t.textContent=title;h.append(s,t);return h}
+function makeCard(e,index){
+ const card=document.createElement('article');card.className='card';card.id='card-'+index;
+ const h=document.createElement('h3');const num=document.createElement('span');num.textContent=`Exercițiul ${index+1}`;const tag=document.createElement('span');tag.className='tag';tag.textContent=e.category;h.append(num,tag);
+ const p=document.createElement('div');p.className='problem';p.textContent=e.prompt;
+ const row=document.createElement('div');row.className='answer-row';const label=document.createElement('label');label.htmlFor='answer-'+index;label.textContent='Răspuns:';
+ const input=document.createElement('input');input.className='answer';input.id='answer-'+index;input.type='text';input.inputMode='numeric';input.autocomplete='off';input.setAttribute('aria-label',`Răspuns pentru exercițiul ${index+1}`);input.placeholder='Scrie numărul';input.maxLength=24;
+ input.addEventListener('input',()=>{if(!checked){card.classList.remove('correct','incorrect','unanswered');const status=card.querySelector('.status');if(status)status.textContent='';const fb=card.querySelector('.feedback');if(fb)fb.remove()}});
+ row.append(label,input);
+ const status=document.createElement('p');status.className='status';status.setAttribute('aria-live','polite');
+ const work=document.createElement('div');work.className='work-lines';work.setAttribute('aria-hidden','true');
+ card.append(h,p,row,status,work);return card;
+}
+function render(){
+ area.replaceChildren();
+ const groups=[
+  {title:'A. Adunare',icon:'＋',start:0,end:4},
+  {title:'B. Scădere',icon:'−',start:4,end:8},
+  {title:'C. Află termenul necunoscut',icon:'x',start:8,end:10},
+  {title:'D. Provocări de gândire matematică',icon:'★',start:10,end:12}
+ ];
+ for(const g of groups){area.append(sectionTitle(g.title,g.icon));const grid=document.createElement('div');grid.className='grid';for(let i=g.start;i<g.end;i++)grid.append(makeCard(exercises[i],i));area.append(grid)}
+ document.getElementById('variant').textContent=`Varianta ${variantNo}`;
+ document.getElementById('printLevel').textContent=levelNames[levelSelect.value];
+ resultBox.classList.remove('show');document.getElementById('score').textContent='0 / 12 puncte';document.getElementById('percent').textContent='0% răspunsuri corecte';document.getElementById('summary').textContent='';document.getElementById('progressFill').style.width='0%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow','0');checked=false;checkBtn.disabled=false;checkBtn.textContent='VERIFICĂ RĂSPUNSURILE';
+}
+function normalizeAnswer(raw){return raw.trim().replace(/[\s\u00a0\u202f]/g,'')}
+function parseAnswer(raw){
+ const value=normalizeAnswer(raw);
+ if(!value)return {valid:false,reason:'empty'};
+ if(!/^\d+$/.test(value))return {valid:false,reason:'format'};
+ const n=Number(value);if(!Number.isSafeInteger(n))return {valid:false,reason:'format'};
+ return {valid:true,value:n};
+}
+function determineError(e,submitted){
+ if(e.type==='add'||e.type==='sub'){
+  if(submitted<0)return 'Răspunsul trebuie să fie un număr natural.';
+  if(e.type==='add'&&submitted<Math.max(e.a,e.b))return 'Estimează suma: rezultatul adunării nu poate fi mai mic decât fiecare termen.';
+  if(e.type==='sub'&&submitted>e.a)return 'Estimează diferența: rezultatul scăderii nu poate depăși descăzutul.';
+  return 'Verifică din nou calculele, cifră cu cifră, apoi folosește operația inversă.';
+ }
+ if(e.type==='unknown')return 'Folosește operația inversă pentru a izola termenul necunoscut.';
+ if(e.type==='error')return 'Recalculează suma și compar-o cu rezultatul propus de elev.';
+ return 'Adunarea este operația inversă a scăderii. Refă verificarea.';
+}
+function checkAnswers(){
+ if(checked)return;checked=true;let points=0,answered=0;
+ exercises.forEach((e,i)=>{
+  const card=document.getElementById('card-'+i),input=document.getElementById('answer-'+i),status=card.querySelector('.status');
+  const old=card.querySelector('.feedback');if(old)old.remove();
+  const parsed=parseAnswer(input.value);
+  if(!parsed.valid){
+   card.classList.add('unanswered');card.classList.remove('correct','incorrect');
+   status.textContent=parsed.reason==='empty'?'Necompletat: acest exercițiu nu primește punct.':'Format nevalid. Introdu un număr întreg, fără litere sau semne.';
+   if(parsed.reason==='empty')status.textContent='Necompletat: completează răspunsul pentru a primi punctul.';
+  }else{
+   answered++;
+   if(parsed.value===e.answer){points++;card.classList.add('correct');card.classList.remove('incorrect','unanswered');status.textContent='Corect! Ai calculat corect.'}
+   else{card.classList.add('incorrect');card.classList.remove('correct','unanswered');status.textContent='Răspuns incorect. Continuă: acum poți vedea metoda de verificare.'}
+  }
+  if(!parsed.valid||parsed.value!==e.answer){
+   const fb=document.createElement('div');fb.className='feedback';
+   const answerLine=document.createElement('div');answerLine.textContent=`Răspuns corect: ${fmt(e.answer)}.`;
+   const explanation=document.createElement('div');explanation.textContent=e.explanation;
+   const hint=document.createElement('div');hint.textContent=parsed.reason==='format'?'Introdu numai cifrele numărului.':(parsed.valid?determineError(e,parsed.value):'Încearcă să rezolvi exercițiul folosind algoritmul scris și verificarea prin operația inversă.');
+   fb.append(answerLine,explanation,hint);card.append(fb);
+  }
+  input.disabled=true;
+ });
+ const percent=Math.round(points/12*100);
+ document.getElementById('score').textContent=`${points} / 12 puncte`;
+ document.getElementById('percent').textContent=`${percent}% răspunsuri corecte`;
+ document.getElementById('progressFill').style.width=percent+'%';document.querySelector('[role="progressbar"]').setAttribute('aria-valuenow',String(percent));
+ document.getElementById('summary').textContent=points===12?'Excelent! Ai rezolvat corect toate exercițiile.':points>=9?'Foarte bine! Revizuiește exercițiile marcate și observă metoda de verificare.':points>=6?'Ai o bază bună. Analizează explicațiile și încearcă o nouă variantă.':'Continuă! Folosește explicațiile pentru a identifica pașii care te ajută să calculezi mai sigur.';
+ resultBox.classList.add('show');checkBtn.disabled=true;checkBtn.textContent='RĂSPUNSURI VERIFICATE';resultBox.scrollIntoView({behavior:'smooth',block:'start'});
+}
+function generateNew(){
+ const dirty=Array.from(document.querySelectorAll('.answer')).some(i=>i.value.trim()!=='');
+ if(dirty&&!window.confirm('Ai introdus răspunsuri. Sigur dorești o evaluare nouă? Răspunsurile curente se vor șterge.'))return;
+ let candidate,signature;
+ for(let attempt=0;attempt<8;attempt++){
+  candidate=buildEvaluation();signature=candidate.map(e=>e.type+':'+e.prompt).join('|');
+  if(signature!==lastSignature)break;
+ }
+ exercises=candidate;lastSignature=signature;variantNo++;render();
+}
+function init(){try{exercises=buildEvaluation();lastSignature=exercises.map(e=>e.type+':'+e.prompt).join('|');variantNo=1;render()}catch(err){area.textContent='A apărut o problemă la generarea exercițiilor. Schimbă nivelul și încearcă din nou.';console.error(err)}}
+checkBtn.addEventListener('click',checkAnswers);
+document.getElementById('newBtn').addEventListener('click',generateNew);
+document.getElementById('printBtn').addEventListener('click',()=>window.print());
+levelSelect.addEventListener('change',()=>{
+ document.getElementById('levelDescription').textContent=levelDescriptions[levelSelect.value];
+ const dirty=Array.from(document.querySelectorAll('.answer')).some(i=>i.value.trim()!=='');
+ if(dirty&&!window.confirm('Schimbarea nivelului va genera o evaluare nouă și va șterge răspunsurile introduse. Continui?')){levelSelect.value=Object.keys(levelNames).find(k=>levelNames[k]===document.getElementById('printLevel').textContent)||'2';document.getElementById('levelDescription').textContent=levelDescriptions[levelSelect.value];return}
+ exercises=buildEvaluation();lastSignature=exercises.map(e=>e.type+':'+e.prompt).join('|');variantNo++;render();
+});
+init();
+</script>
+</body>
+</html>
